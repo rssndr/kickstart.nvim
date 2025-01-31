@@ -157,6 +157,40 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Tab size
+-- Set global default tab size (optional)
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+-- Filetype-specific settings
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'c',
+  callback = function()
+    vim.opt_local.tabstop = 8
+    vim.opt_local.shiftwidth = 8
+    vim.opt_local.expandtab = true
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'javascript',
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'jsx',
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
+  end,
+})
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
