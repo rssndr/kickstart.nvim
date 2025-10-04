@@ -885,22 +885,19 @@ require('lazy').setup({
     end,
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      require('tokyonight').setup { transparent = true }
-      vim.cmd.colorscheme 'tokyonight-night'
-
-      -- You can configure highlights by doing something like:
-      vim.cmd.hi 'Comment gui=none'
+  {
+    'metalelf0/black-metal-theme-neovim',
+    lazy = false, -- Load early to ensure colorscheme is available
+    priority = 1000, -- High priority for colorschemes
+    config = function()
+      require('black-metal').setup {
+        theme = 'taake', -- Set Taake as the default theme
+        variant = 'dark', -- Use the dark variant (default)
+        alt_bg = false, -- Set to true for marduk-alt (lighter background)
+        transparent = true, -- For transparent background (like tokyonight)
+      }
+      -- Load the colorscheme after setup
+      vim.cmd.colorscheme 'taake'
     end,
   },
 
@@ -970,7 +967,7 @@ require('lazy').setup({
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
---[[
+  --[[
   { -- Integrated Github Copilot
     'github/copilot.vim',
     cmd = 'Copilot',
@@ -982,7 +979,8 @@ require('lazy').setup({
       vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
     end,
   },
-]]--
+]]
+  --
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
